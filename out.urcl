@@ -1,0 +1,16 @@
+BITS 8
+MINHEAP 0
+MINSTACK 256
+MINREG 10
+ADD R1 R1 1
+imm R2 0
+brz .hex_end1 r1
+.hex_loop1
+mov r1 r2
+ADD R1 R1 1
+PSH R1
+INC R2 R2
+BNE .hex_loop1 R2 0x10
+.hex_end1
+POP R1
+OUT %HEX R1
