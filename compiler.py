@@ -62,7 +62,7 @@ def compiler(toks: list[Token]) -> str:
 				
 				register += 1
 
-				to_ret += "imm R" + register.__str__() + ' 0\n'
+				to_ret += "imm R" + register.__str__() + ' 0x' + toks[i].content + '\n'
 				loop_stack.append("hex_loop 0x" + toks[i].content + ' ' + register.__str__() + ' ' + i.__str__())
 				to_ret += "brz .hex_end" + i.__str__() + " r1\n"
 				to_ret += ".hex_loop" + i.__str__() + '\n'
@@ -79,8 +79,8 @@ def compiler(toks: list[Token]) -> str:
 						to_ret += "JMP .infinite_loop" + type_and_val[1] + '\n'
 					
 					case "hex_loop":
-						to_ret += "INC R" + register.__str__() + " R" + register.__str__() + '\n'
-						to_ret += "BNE .hex_loop" + type_and_val[3] + " R" + type_and_val[2] + ' ' + type_and_val[1] + '\n'
+						to_ret += "DEC R" + register.__str__() + " R" + register.__str__() + '\n'
+						to_ret += "BNE .hex_loop" + type_and_val[3] + " R" + type_and_val[2] + ' 1\n'
 						to_ret += ".hex_end" + type_and_val[3] + '\n'
 						register -= 1
 			
