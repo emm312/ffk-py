@@ -62,9 +62,9 @@ def compiler(toks: list[Token]) -> str:
 				
 				register += 1
 
-				to_ret += "imm R" + register.__str__() + ' 0x' + toks[i].content + '\n'
+				to_ret += "IMM R" + register.__str__() + ' 0x' + toks[i].content + '\n'
 				loop_stack.append("hex_loop 0x" + toks[i].content + ' ' + register.__str__() + ' ' + i.__str__())
-				to_ret += "brz .hex_end" + i.__str__() + " r1\n"
+				to_ret += "BRZ .hex_end" + i.__str__() + " R1\n"
 				to_ret += ".hex_loop" + i.__str__() + '\n'
 			
 			case TokenType.END_LOOP:
@@ -88,7 +88,7 @@ def compiler(toks: list[Token]) -> str:
 				if is_reg_instruction:
 					is_reg_instruction = False
 					ctr = 0
-				to_ret += "mov r1 r" + register.__str__() + '\n'
+				to_ret += "MOV R1 R" + register.__str__() + '\n'
 
 
 			case TokenType.HEX_PORT_OUT:

@@ -3,10 +3,10 @@ MINHEAP 0
 MINSTACK 256
 MINREG 10
 ADD R1 R1 1
-imm R2 0x10
-brz .hex_end1 r1
+IMM R2 0x10
+BRZ .hex_end1 R1
 .hex_loop1
-mov r1 r2
+MOV R1 R2
 OUT %HEX R1
 DEC R2 R2
 BNE .hex_loop1 R2 1
