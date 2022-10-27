@@ -104,7 +104,6 @@ def compiler(toks: list[Token]) -> str:
 				if is_reg_instruction:
 					is_reg_instruction = False
 					ctr = 0
-				
 				to_ret += "IN R1 0x" + toks[i].content + '\n'
 
 			case TokenType.PORT_OUT:
@@ -145,10 +144,6 @@ def compiler(toks: list[Token]) -> str:
 				to_ret += "BRZ .reg_end" + i.__str__() + " R1\n"
 				to_ret += ".reg_loop" + i.__str__() + '\n'
 				loop_stack.append("reg_loop " + i.__str__() + ' ' + register.__str__())
-
-
-			
-				
 			
 			case _: continue
 		i += 1
