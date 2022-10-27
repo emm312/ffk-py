@@ -22,6 +22,7 @@ class TokenType(Enum):
     POP = 13
     LOOP_COUNTER = 14
     HEX_LOOP = 15
+    REGISTER_LOOP = 16
 
 class Token:
     def __init__(self, content: str, type: TokenType) -> None:
@@ -59,6 +60,8 @@ def tokenise(src: str) -> list[Token]:
                     toks.append(Token("?<", TokenType.POP))
                 elif src[i+1] == ">":
                     toks.append(Token("?>", TokenType.PUSH))
+                elif src[i+1] == "[":
+                    toks.append(Token("?[", TokenType.REGISTER_LOOP))
                 else:
                     print("?????????????????????????? what da ? doin????")
                     exit(-1)

@@ -75,9 +75,15 @@ def compiler(toks: list[Token]) -> str:
 						to_ret += "JMP .infinite_loop" + type_and_val[1] + '\n'
 					
 					case "hex_loop":
-						to_ret += "DEC R" + register.__str__() + " R" + register.__str__() + '\n'
+						to_ret += "DEC R" + type_and_val[2] + " R" + register.__str__() + '\n'
 						to_ret += "BNE .hex_loop" + type_and_val[3] + " R" + type_and_val[2] + ' 0\n'
 						to_ret += ".hex_end" + type_and_val[3] + '\n'
+						register -= 1
+					
+					case "reg_loop":
+						to_ret += "DEC R" + type_and_val[2] + " R" + type_and_val[2] + '\n'
+						to_ret += "BNZ .reg_loop" + type_and_val[1] + " R" + type_and_val[2] + '\n'
+						to_ret += ".reg_end" + type_and_val[1] + '\n'
 						register -= 1
 			
 			case TokenType.LOOP_COUNTER:
@@ -128,6 +134,18 @@ def compiler(toks: list[Token]) -> str:
 					ctr = 0
 				
 				to_ret += "IN R1 %TEXT\n"
+
+			case TokenType.REGISTER_LOOP:
+				if is_reg_instruction:
+					to_ret += "ADD R1 R1 " + ctr.__str__() + '\n'
+					is_reg_instruction = False
+					ctr = 0
+				register += 1
+				to_ret += "MOV R" + register.__str__() + " R1\n"
+				to_ret += "BRZ .reg_end" + i.__str__() + " R1\n"
+				to_ret += ".reg_loop" + i.__str__() + '\n'
+				loop_stack.append("reg_loop " + i.__str__() + ' ' + register.__str__())
+
 
 			
 				
