@@ -3,11 +3,92 @@ MINHEAP 0
 MINSTACK 256
 MINREG 10
 ADD R1 R1 1
-IMM R2 0x10
+IMM R2 0x47
 BRZ .hex_end1 R1
 .hex_loop1
-MOV R1 R2
-OUT %HEX R1
+ADD R1 R1 1
 DEC R2 R2
-BNE .hex_loop1 R2 1
+BNE .hex_loop1 R2 0
 .hex_end1
+OUT %TEXT R1
+IMM R2 0x1D
+BRZ .hex_end5 R1
+.hex_loop5
+ADD R1 R1 1
+DEC R2 R2
+BNE .hex_loop5 R2 0
+.hex_end5
+OUT %TEXT R1
+IMM R2 0x07
+BRZ .hex_end9 R1
+.hex_loop9
+ADD R1 R1 1
+DEC R2 R2
+BNE .hex_loop9 R2 0
+.hex_end9
+OUT %TEXT R1
+OUT %TEXT R1
+IMM R2 0x03
+BRZ .hex_end14 R1
+.hex_loop14
+ADD R1 R1 1
+DEC R2 R2
+BNE .hex_loop14 R2 0
+.hex_end14
+OUT %TEXT R1
+IMM R2 0x4F
+BRZ .hex_end18 R1
+.hex_loop18
+ADD R1 R1 -1
+DEC R2 R2
+BNE .hex_loop18 R2 0
+.hex_end18
+OUT %TEXT R1
+IMM R2 0x57
+BRZ .hex_end22 R1
+.hex_loop22
+ADD R1 R1 1
+DEC R2 R2
+BNE .hex_loop22 R2 0
+.hex_end22
+OUT %TEXT R1
+IMM R2 0x08
+BRZ .hex_end26 R1
+.hex_loop26
+ADD R1 R1 -1
+DEC R2 R2
+BNE .hex_loop26 R2 0
+.hex_end26
+OUT %TEXT R1
+IMM R2 0x03
+BRZ .hex_end30 R1
+.hex_loop30
+ADD R1 R1 1
+DEC R2 R2
+BNE .hex_loop30 R2 0
+.hex_end30
+OUT %TEXT R1
+IMM R2 0x06
+BRZ .hex_end34 R1
+.hex_loop34
+ADD R1 R1 -1
+DEC R2 R2
+BNE .hex_loop34 R2 0
+.hex_end34
+OUT %TEXT R1
+IMM R2 0x08
+BRZ .hex_end38 R1
+.hex_loop38
+ADD R1 R1 -1
+DEC R2 R2
+BNE .hex_loop38 R2 0
+.hex_end38
+OUT %TEXT R1
+IMM R2 0x43
+BRZ .hex_end42 R1
+.hex_loop42
+ADD R1 R1 -1
+DEC R2 R2
+BNE .hex_loop42 R2 0
+.hex_end42
+OUT %TEXT R1

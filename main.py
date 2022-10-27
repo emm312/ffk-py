@@ -1,7 +1,10 @@
+import sys
 import lexer
 import compiler
 
-with open("input.ffk", "r") as infile:
+if sys.argv.__len__() < 3: print("read the docs"), exit(-1)
+
+with open(sys.argv[1], "r") as infile:
     src = infile.read()
-with open("out.urcl", "w") as file:
+with open(sys.argv[2], "w") as file:
     file.write(compiler.compile(src))

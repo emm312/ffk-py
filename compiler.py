@@ -1,8 +1,4 @@
-
 from lexer import *
-
-
-
 
 
 def compile(src) -> str:
@@ -80,7 +76,7 @@ def compiler(toks: list[Token]) -> str:
 					
 					case "hex_loop":
 						to_ret += "DEC R" + register.__str__() + " R" + register.__str__() + '\n'
-						to_ret += "BNE .hex_loop" + type_and_val[3] + " R" + type_and_val[2] + ' 1\n'
+						to_ret += "BNE .hex_loop" + type_and_val[3] + " R" + type_and_val[2] + ' 0\n'
 						to_ret += ".hex_end" + type_and_val[3] + '\n'
 						register -= 1
 			
