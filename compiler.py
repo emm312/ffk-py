@@ -8,7 +8,7 @@ def compile(src) -> str:
 	return compiler(toks)
 
 def compiler(toks: list[Token]) -> str:
-	to_ret = """BITS 8\nMINHEAP 0\nMINSTACK 256\nMINREG 10\n"""
+	to_ret = """MINSTACK 0xff\n"""
 
 	ctr = 0
 	is_reg_instruction = False
