@@ -1,6 +1,5 @@
 from lexer import *
 
-
 def compile(src) -> str:
 	toks = tokenise(src)
 	#for tok in toks:
@@ -8,7 +7,7 @@ def compile(src) -> str:
 	return compiler(toks)
 
 def compiler(toks: list[Token]) -> str:
-	to_ret = """MINSTACK 0xff\n"""
+	to_ret = """MINSTACK 0xf0\n"""
 
 	ctr = 0
 	is_reg_instruction = False
@@ -55,13 +54,19 @@ def compiler(toks: list[Token]) -> str:
 					to_ret += "ADD R1 R1 " + ctr.__str__() + '\n'
 					is_reg_instruction = False
 					ctr = 0
-				
-				register += 1
-
-				to_ret += "IMM R" + register.__str__() + ' 0x' + toks[i].content + '\n'
-				loop_stack.append("hex_loop 0x" + toks[i].content + ' ' + register.__str__() + ' ' + i.__str__())
-				to_ret += "BRZ .hex_end" + i.__str__() + " R1\n"
-				to_ret += ".hex_loop" + i.__str__() + '\n'
+				if toks[i+2].type == TokenType.END_LOOP and (toks[i+1].type == TokenType.ADD or toks[i+1].type == TokenType.SUB):
+					to_ret += "BRZ ~+2 R1\n"
+					if toks[i+1].type == TokenType.ADD:
+						to_ret += "ADD R1 R1 0x" + toks[i].content + '\n'
+					else:
+						to_ret += "SUB R1 R1 0x" + toks[i].content + '\n'
+					i += 2
+				else:
+					register += 1
+					to_ret += "IMM R" + register.__str__() + ' 0x' + toks[i].content + '\n'
+					loop_stack.append("hex_loop 0x" + toks[i].content + ' ' + register.__str__() + ' ' + i.__str__())
+					to_ret += "BRZ .hex_end" + i.__str__() + " R1\n"
+					to_ret += ".hex_loop" + i.__str__() + '\n'
 			
 			case TokenType.END_LOOP:
 				if is_reg_instruction:

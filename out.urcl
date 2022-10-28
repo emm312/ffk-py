@@ -1,12 +1,8 @@
-BITS 8
-MINHEAP 0
-MINSTACK 256
-MINREG 10
-ADD R1 R1 1
-MOV R2 R1
-BRZ .reg_end1 R1
-.reg_loop1
-OUT %HEX R1
+MINSTACK 0xf0
+IMM R2 0x55
+BRZ .hex_end0 R1
+.hex_loop0
+ADD R1 R1 3
 DEC R2 R2
-BNZ .reg_loop1 R2
-.reg_end1
+BNE .hex_loop0 R2 0
+.hex_end0
